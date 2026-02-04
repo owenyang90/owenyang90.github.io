@@ -3,454 +3,179 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Owen Yang | In-situ Analysis & Bruggeman n Calculator</title>
-  <meta name="description" content="Showcase of in-situ optical analysis pipeline and Bruggeman effective medium refractive index calculator." />
-
+  <title>Tools Showcase | In-situ Spectra & Bruggeman n_eff</title>
+  <meta name="description" content="Results showcase page with download links for two tools." />
   <style>
     :root{
       --bg:#0b0f17;
-      --card:#111a2b;
-      --muted:#aab3c5;
+      --card:#121a2a;
       --text:#eef2ff;
+      --muted:#aab3c5;
+      --border:rgba(255,255,255,.12);
       --accent:#7c5cff;
-      --accent2:#25d6a2;
-      --border: rgba(255,255,255,.10);
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --radius: 18px;
-      --max: 1120px;
+      --radius:16px;
+      --max:920px;
     }
     *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
                    "Noto Sans TC","PingFang TC","Microsoft JhengHei", Arial, sans-serif;
-      background:
-        radial-gradient(1100px 700px at 10% 10%, rgba(124,92,255,.18), transparent 60%),
-        radial-gradient(900px 600px at 95% 20%, rgba(37,214,162,.14), transparent 55%),
-        linear-gradient(180deg, #070a10 0%, var(--bg) 45%, #070a10 100%);
+      background: linear-gradient(180deg, #070a10 0%, var(--bg) 40%, #070a10 100%);
       color:var(--text);
-      line-height:1.6;
+      line-height:1.65;
     }
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 20px; }
-
-    /* Top nav */
-    .nav{
-      position: sticky; top:0; z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(7,10,16,.55);
+    a{ color:inherit; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 28px 18px 44px; }
+    header{
+      padding: 8px 0 18px;
       border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
     }
-    .nav .inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 14px 0;
-      gap: 12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px; font-weight: 700; letter-spacing:.2px;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 6px rgba(124,92,255,.10);
-    }
-    .links{
-      display:flex; gap: 18px; flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .links a{
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-    }
-    .links a:hover{
-      color: var(--text);
-      border-color: var(--border);
-      background: rgba(255,255,255,.04);
-    }
-
-    /* Hero */
-    .hero{ padding: 58px 0 24px; }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    @media (max-width: 900px){
-      .hero-grid{ grid-template-columns: 1fr; }
-    }
-    .hero-card{
-      background: rgba(17,26,43,.72);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-card:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(800px 280px at 20% 10%, rgba(124,92,255,.26), transparent 55%),
-                  radial-gradient(700px 260px at 80% 40%, rgba(37,214,162,.18), transparent 55%);
-      pointer-events:none;
-    }
-    .hero-card > *{ position: relative; }
     h1{
-      margin:0 0 10px;
-      font-size: clamp(28px, 3.2vw, 44px);
-      line-height:1.15;
+      margin: 0 0 6px;
+      font-size: clamp(22px, 3vw, 32px);
       letter-spacing:.2px;
     }
     .sub{
-      margin:0 0 18px;
+      margin: 0;
       color: var(--muted);
-      font-size: 15.5px;
-      max-width: 60ch;
+      font-size: 14.5px;
+      max-width: 70ch;
     }
-    .pillrow{ display:flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 22px; }
-    .pill{
-      font-size: 13px;
-      color: #dbe3ff;
+    .grid{
+      display:grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card{
+      background: rgba(18,26,42,.75);
       border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      padding: 7px 10px;
-      border-radius: 999px;
+      border-radius: var(--radius);
+      padding: 16px 16px 14px;
     }
-    .cta{
-      display:flex; gap: 12px; flex-wrap: wrap;
+    .card h2{
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .desc{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    ul{
+      margin: 0 0 12px;
+      padding-left: 18px;
+      color: #dde4ff;
+      font-size: 14px;
+    }
+    li{ margin: 6px 0; }
+    .btnrow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-top: 6px;
     }
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding: 11px 14px;
-      border-radius: 14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 12px;
+      border-radius: 12px;
       border: 1px solid var(--border);
       background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-weight: 600;
+      text-decoration:none;
+      font-weight: 650;
       font-size: 14px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
+    .btn:hover{ border-color: rgba(255,255,255,.22); }
     .btn.primary{
       border: none;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      background: linear-gradient(135deg, var(--accent), #25d6a2);
       color: #0a0e16;
     }
-    .btn.primary:hover{ background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(37,214,162,.95)); }
-    .side{
-      display:grid;
-      gap: 18px;
-    }
-    .mini{
-      background: rgba(17,26,43,.55);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    .mini h3{ margin: 0 0 8px; font-size: 15px; letter-spacing:.2px; }
-    .mini p{ margin:0; color: var(--muted); font-size: 13.5px; }
-
-    /* Sections */
-    section{ padding: 28px 0; }
-    .sec-title{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-    .sec-title h2{ margin:0; font-size: 22px; letter-spacing:.2px; }
-    .sec-title span{ color: var(--muted); font-size: 13.5px; }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-    @media (max-width: 900px){ .grid{ grid-template-columns: 1fr; } }
-
-    .card{
-      background: rgba(17,26,43,.55);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    .card h3{ margin:0 0 10px; font-size: 18px; }
-    .meta{
-      display:flex; gap: 8px; flex-wrap: wrap;
-      margin-bottom: 10px;
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-    .tag{
-      padding: 5px 9px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-    }
-    .list{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: #dde4ff;
-    }
-    .list li{ margin: 6px 0; }
-    .muted{ color: var(--muted); }
-
-    /* Media placeholder */
-    .media{
-      margin-top: 14px;
-      border: 1px dashed rgba(255,255,255,.25);
-      border-radius: 14px;
-      padding: 14px;
+    footer{
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 13px;
-      background: rgba(255,255,255,.03);
     }
-    .media strong{ color: var(--text); }
-
-    /* Footer */
-    footer{
-      padding: 30px 0 46px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      margin-top: 14px;
+    code{
+      background: rgba(255,255,255,.06);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.10);
     }
-    .foot{
-      display:flex; justify-content:space-between; gap: 16px; flex-wrap: wrap;
-      align-items:center;
-    }
-    .small{ font-size: 13px; }
-    .inline{
-      display:flex; gap: 12px; flex-wrap: wrap;
-    }
-    .inline a{
-      border: 1px solid transparent;
-      padding: 8px 10px;
-      border-radius: 12px;
-    }
-    .inline a:hover{ border-color: var(--border); background: rgba(255,255,255,.04); color: var(--text); }
   </style>
 </head>
 
 <body>
-  <!-- NAV -->
-  <div class="nav">
-    <div class="wrap">
-      <div class="inner">
-        <div class="brand">
-          <span class="dot"></span>
-          <span>Owen Yang | Portfolio</span>
+  <div class="wrap">
+    <header>
+      <h1>Results Showcase</h1>
+      <p class="sub">
+        本頁僅展示兩個工具成果與下載連結：<br/>
+        <strong>in-situ 光纖光譜分析</strong> 與 <strong>Bruggeman 等效折射率（GUI）</strong>。
+      </p>
+    </header>
+
+    <main class="grid">
+      <!-- In-situ spectra tool -->
+      <section class="card" id="insitu">
+        <h2>In-situ 光纖光譜分析程式</h2>
+        <p class="desc">
+          用於處理光纖光譜的 in-situ 數據，將時間序列量測資料整理為可讀、可輸出的分析結果。
+        </p>
+        <ul>
+          <li>輸入：光纖光譜 in-situ 原始資料（時間序列）</li>
+          <li>輸出：整理後的分析結果（可用於後續報告/留存）</li>
+        </ul>
+        <div class="btnrow">
+          <!-- TODO: 換成你的 Google Drive 分享連結 -->
+          <a class="btn primary" href="https://drive.google.com/file/d/1yPTl6h54iZljWMKDx9Bewwtq1N1JWbKV/view?usp=sharing" target="_blank" rel="noreferrer">
+            Download (Google Drive)
+          </a>
+          <a class="btn" href="#bruggeman">Go to Bruggeman ↓</a>
         </div>
-        <nav class="links">
-          <a href="#projects">Projects</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#stack">Tech Stack</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
-    </div>
+      </section>
+
+      <!-- Bruggeman tool -->
+      <section class="card" id="bruggeman">
+        <h2>Bruggeman 等效折射率計算器（GUI）</h2>
+        <p class="desc">
+          GUI 可填入兩種高分子與空氣的折射率，以及體積分率，計算 Bruggeman 等效折射率 <code>n_eff</code>。
+          不支援波長依賴。
+        </p>
+        <ul>
+          <li>支援：<strong>2 相（polymer + air）</strong>與<strong>3 相（polymer A + polymer B + air）</strong></li>
+          <li>不支援：折射率隨波長變化（wavelength-dependent n）</li>
+          <li>輸入：n(A)、n(B)、n(air) + 體積分率</li>
+          <li>輸出：Bruggeman 等效折射率 n<sub>eff</sub></li>
+        </ul>
+        <div class="btnrow">
+          <!-- TODO: 換成你的 Google Drive 分享連結 -->
+          <a class="btn primary" href="https://drive.google.com/file/d/17hD3Wrhw0SZpMcsPRPvJER9iNY8Zgg1I/view?usp=sharing" target="_blank" rel="noreferrer">
+            Download (Google Drive)
+          </a>
+          <a class="btn" href="#insitu">Back to In-situ ↑</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>Last updated: <span id="d"></span></div>
+    </footer>
   </div>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="hero-card">
-          <h1>In-situ Optical Analysis & Bruggeman n Calculator</h1>
-          <p class="sub">
-            我把「薄膜/光子晶體」的量測與分析流程，做成可重現、可自動化的工具鏈：一套用於 in-situ 光譜/反射率分析，
-            另一套用於 Bruggeman effective medium approximation 的折射率預測，支援材料設計與實驗決策。
-          </p>
-
-          <div class="pillrow">
-            <span class="pill">Automation • Reproducibility</span>
-            <span class="pill">In-situ Spectroscopy</span>
-            <span class="pill">Effective Medium Model</span>
-            <span class="pill">Python / GUI</span>
-          </div>
-
-          <div class="cta">
-            <!-- TODO: 換成你的 demo/影片/Repo/論文連結 -->
-            <a class="btn primary" href="#projects">View Projects ↓</a>
-            <a class="btn" href="https://example.com" target="_blank" rel="noreferrer">Live Demo</a>
-            <a class="btn" href="https://example.com" target="_blank" rel="noreferrer">GitHub / Repo</a>
-          </div>
-        </div>
-
-        <div class="side">
-          <div class="mini">
-            <h3>你可以放什麼？</h3>
-            <p>1 張工具截圖 + 1 張分析輸出（peak tracking / n_eff 曲線）就很有說服力。</p>
-          </div>
-          <div class="mini">
-            <h3>適合面試講的點</h3>
-            <p>把「量測 → 資料處理 → 模型/推論 → 決策」串起來，強調可重現與效率提升。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="wrap">
-      <div class="sec-title">
-        <h2>Projects</h2>
-        <span>兩個工具、同一個目標：加速實驗與設計迭代</span>
-      </div>
-
-      <div class="grid">
-        <!-- Project 1 -->
-        <article class="card">
-          <h3>① In-situ Analysis Pipeline</h3>
-          <div class="meta">
-            <span class="tag">Spectra processing</span>
-            <span class="tag">Peak tracking</span>
-            <span class="tag">Export & reporting</span>
-          </div>
-          <p class="muted">
-            用於 in-situ UV-Vis/NIR 量測（溶劑交換、乾燥、反射峰移動等），將原始資料自動化整理，
-            並同步輸出關鍵指標（最大反射率、峰值波長、時間序列）。
-          </p>
-          <ul class="list">
-            <li>自動讀取量測檔案、整理時間軸與取樣點</li>
-            <li>峰值偵測 / peak tracking（可用於監控 equilibration）</li>
-            <li>輸出：圖 + summary table（CSV/Excel）便於放入報告/論文</li>
-            <li>可擴充：baseline correction、平滑、批次處理、多樣品比較</li>
-          </ul>
-          <div class="media">
-            <strong>Media placeholder:</strong>
-            放一張「時間序列 peak shift 圖」或「GUI 截圖」。
-            <br/>（把這段替換成 &lt;img&gt; 或影片連結）
-          </div>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="card">
-          <h3>② Bruggeman Refractive Index Calculator</h3>
-          <div class="meta">
-            <span class="tag">EMA model</span>
-            <span class="tag">n<sub>eff</sub> prediction</span>
-            <span class="tag">GUI tool</span>
-          </div>
-          <p class="muted">
-            以 Bruggeman effective medium approximation 估算複合材料或多孔結構的有效折射率 n<sub>eff</sub>，
-            輔助材料配方、孔隙率/填充率推估與光學設計（如 Bragg 反射波長預測的前處理）。
-          </p>
-          <ul class="list">
-            <li>輸入：各相折射率、體積分率（或孔隙率/填充率）</li>
-            <li>輸出：n<sub>eff</sub>、敏感度掃描（f vs n<sub>eff</sub>）</li>
-            <li>可用於：多孔薄膜、BCP 模板填充、MOF/氧化物 backfill 等</li>
-            <li>支援：快速試算、批次參數 sweep、結果匯出</li>
-          </ul>
-          <div class="media">
-            <strong>Media placeholder:</strong>
-            放一張「n_eff vs volume fraction 曲線」或「參數 sweep 表格」。
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORKFLOW -->
-  <section id="workflow">
-    <div class="wrap">
-      <div class="sec-title">
-        <h2>Workflow</h2>
-        <span>Measurement → Analysis → Model → Decision</span>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <h3>In-situ Analysis</h3>
-          <ul class="list">
-            <li>資料匯入：原始光譜/反射率檔案（時間序列）</li>
-            <li>前處理：對齊時間、選波段、可選平滑/基線</li>
-            <li>特徵萃取：peak λ、peak intensity、統計指標</li>
-            <li>輸出：figures + tables → 報告/簡報可直接使用</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Bruggeman Calculator</h3>
-          <ul class="list">
-            <li>定義材料相：n、volume fraction / porosity</li>
-            <li>求解 n<sub>eff</sub>（支援參數 sweep）</li>
-            <li>與實驗結果交叉驗證：反射峰位置/顏色漂移</li>
-            <li>作為實驗設計工具：快速縮小配方與條件範圍</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STACK -->
-  <section id="stack">
-    <div class="wrap">
-      <div class="sec-title">
-        <h2>Tech Stack</h2>
-        <span>可依你實作調整</span>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <h3>Core</h3>
-          <ul class="list">
-            <li>Python（NumPy / SciPy / Pandas）</li>
-            <li>Visualization（Matplotlib）</li>
-            <li>Data I/O（CSV/Excel export）</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Interface & Delivery</h3>
-          <ul class="list">
-            <li>GUI：Tkinter / PyQt（擇一）</li>
-            <li>Packaging：PyInstaller（exe 發佈）</li>
-            <li>Documentation：README / usage notes</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="sec-title">
-        <h2>Contact</h2>
-        <span>把下面資訊換成你的</span>
-      </div>
-
-      <div class="card">
-        <p class="muted" style="margin:0 0 10px;">
-          若你想看 demo、程式碼或合作討論，歡迎聯絡我。
-        </p>
-        <div class="inline">
-          <!-- TODO: 換成你的連結 -->
-          <a href="mailto:you@example.com">Email</a>
-          <a href="https://www.linkedin.com/in/example" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="https://github.com/example" target="_blank" rel="noreferrer">GitHub</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap">
-      <div class="foot">
-        <div class="small">© <span id="y"></span> Owen Yang. All rights reserved.</div>
-        <div class="small">Built as a single-page static site.</div>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    // 顯示本機日期（不依賴伺服器）
+    const now = new Date();
+    document.getElementById("d").textContent =
+      now.getFullYear() + "-" +
+      String(now.getMonth()+1).padStart(2,"0") + "-" +
+      String(now.getDate()).padStart(2,"0");
   </script>
 </body>
 </html>
