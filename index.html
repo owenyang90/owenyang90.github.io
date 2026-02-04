@@ -116,24 +116,24 @@
     <header>
       <h1>Results Showcase</h1>
       <p class="sub">
-        本頁僅展示兩個工具成果與下載連結：<br/>
-        <strong>in-situ 光纖光譜分析</strong> 與 <strong>Bruggeman 等效折射率（GUI）</strong>。
+        本頁展示兩個工具成果與下載連結：<br/>
+        <strong>in-situ 光纖光譜分析 (GUI)</strong> 與 <strong>Bruggeman 等效折射率 (GUI)</strong>。
       </p>
     </header>
 
     <main class="grid">
       <!-- In-situ spectra tool -->
       <section class="card" id="insitu">
-        <h2>In-situ 光纖光譜分析程式</h2>
+        <h2>In-situ 光纖光譜分析程式 (GUI) </h2>
         <p class="desc">
           用於處理光纖光譜的 in-situ 數據，將時間序列量測資料整理為可讀、可輸出的分析結果。
         </p>
         <ul>
           <li>輸入：光纖光譜 in-situ 原始資料（時間序列）</li>
           <li>輸出：整理後的分析結果（可用於後續報告/留存）</li>
+	  <li>執行下一組分析前請先關閉上一個EXCEL</li>
         </ul>
         <div class="btnrow">
-          <!-- TODO: 換成你的 Google Drive 分享連結 -->
           <a class="btn primary" href="https://drive.google.com/file/d/1yPTl6h54iZljWMKDx9Bewwtq1N1JWbKV/view?usp=sharing" target="_blank" rel="noreferrer">
             Download (Google Drive)
           </a>
@@ -143,7 +143,7 @@
 
       <!-- Bruggeman tool -->
       <section class="card" id="bruggeman">
-        <h2>Bruggeman 等效折射率計算器（GUI）</h2>
+        <h2>Bruggeman 等效折射率計算器 (GUI)</h2>
         <p class="desc">
           GUI 可填入兩種高分子與空氣的折射率，以及體積分率，計算 Bruggeman 等效折射率 <code>n_eff</code>。
           不支援波長依賴。
@@ -153,9 +153,9 @@
           <li>不支援：折射率隨波長變化（wavelength-dependent n）</li>
           <li>輸入：n(A)、n(B)、n(air) + 體積分率</li>
           <li>輸出：Bruggeman 等效折射率 n<sub>eff</sub></li>
+	  <li>Volume Fraction (air) 欄請填入as-spun膜厚/TOSC膜厚之值</li>
         </ul>
         <div class="btnrow">
-          <!-- TODO: 換成你的 Google Drive 分享連結 -->
           <a class="btn primary" href="https://drive.google.com/file/d/17hD3Wrhw0SZpMcsPRPvJER9iNY8Zgg1I/view?usp=sharing" target="_blank" rel="noreferrer">
             Download (Google Drive)
           </a>
@@ -165,8 +165,12 @@
     </main>
 
     <footer>
-      <div>Last updated: <span id="d"></span></div>
-    </footer>
+    <div class="wrap">
+      <div class="foot">
+        <div class="small">© <span id="y"></span> Zih-Yi Yang. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
   </div>
 
   <script>
